@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的计算器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding-top: 50px;
+        }
+        .calc-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        #lineEdit {
+            width: 320px;
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            padding-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 70px;
+            height: 70px;
+            font-size: 22px;
+            margin: 3px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #e9e9e9;
+        }
+        button:active {
+            background-color: #cccccc;
+        }
+        .func-btn {
+            background-color: #ff9500;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calc-box">
+        <!-- 对应你代码里的 lineEdit 输入框 -->
+        <input type="text" id="lineEdit" readonly>
+
+        <!-- 计算器按钮 -->
+        <div>
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+            <button onclick="addNumber('/')" class="func-btn">/</button>
+        </div>
+        <div>
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+            <button onclick="addNumber('*')" class="func-btn">*</button>
+        </div>
+        <div>
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+            <button onclick="addNumber('-')" class="func-btn">-</button>
+        </div>
+        <div>
+            <button onclick="addNumber('0')">0</button>
+            <button onclick="addNumber('.')">.</button>
+            <button onclick="equal()" class="func-btn">=</button>
+            <button onclick="addNumber('+')" class="func-btn">+</button>
+        </div>
+        <div style="margin-top:5px;">
+            <button onclick="back()" style="width:110px;">← 退格</button>
+            <button onclick="clear()" style="width:110px;background:#f44336;color:#fff;">清空 C</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== 完全复刻你 PySide6 的核心变量 & 函数 ==========
+        let result = '';  // 对应 self.result
+
+        // 对应你的 addNumber 函数
+        function addNumber(number) {
+            // self.lineEdit.clear()
+            document.getElementById('lineEdit').value = '';
+            result += number;
+            document.getElementById('lineEdit').value = result;
+        }
+
+        // 对应你的 equal 等于函数
+        function equal() {
+            let numberResult = eval(result);
+            document.getElementById('lineEdit').value = String(numberResult);
+        }
+
+        // 对应你的 clear 清空函数
+        function clear() {
+            result = '';
+            document.getElementById('lineEdit').value = '';
+        }
+
+        // 对应你的 back 退格函数
+        function back() {
+            result = result.slice(0, -1);
+            document.getElementById('lineEdit').value = result;
+        }
+    </script>
+</body>
+</html>
